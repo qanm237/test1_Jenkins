@@ -1,22 +1,31 @@
 # Linkedin  API description
 This is an API which extract data from api.linkedin.com website and pushes it to bigquery
-Once you've
-[registered your client](https://www.linkedin.com/developers/) it's easy
-to start requesting data from Linkedin.
-All endpoints are only accessible via https and are located at
-`api.linkedin.com`.
-You're best off using an access_token for the authenticated user for each
-endpoint, though many endpoints don't require it.
-In some cases an access_token will give you more access to information, and
-in all cases, it means that you are operating under a per-access_token limit
-vs. the same limit for your single client_id.
 ## Requirements
 **Complete these following requirements:**
 * create a [developer profile](https://www.linkedin.com/developers/) 
 * generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow)
-
+## Process flow
+**Step 1:**
+Retrieving all Active campaigns using an API call :
+```
+'https://api.linkedin.com/v2/adCampaignsV2?q=search'
+                 ##+'&search.status.values[0]=ACTIVE'
+                 + '&search.sponsoredAccount.values[0]=urn:li:sponsoredAccount:507533261'
+                 + '&sort.field=ID&sort.order=DESCENDING'
+```
+use a get request with an access tokens passed in headers for eg:
+requests.get('https://api.linkedin.com/v2/adCampaignsV2?q=search'
+                 ##+'&search.status.values[0]=ACTIVE'
+                 + '&search.sponsoredAccount.values[0]=urn:li:sponsoredAccount:507533261'
+                 + '&sort.field=ID&sort.order=DESCENDING',
+                 headers={"Authorization": "Bearer %s" % access_token})
+                
+Here's a sample response we get from this call:
+```json
+{'targetingCriteria': {'include': {'and': [{'or': {'urn:li:adTargetingFacet:interfaceLocales': ['urn:li:locale:en_US']}}, {'or': {'urn:li:adTargetingFacet:locations': ['urn:li:country:us']}}, {'or': {'urn:li:adTargetingFacet:audienceMatchingSegments': ['urn:li:adSegment:2839623']}}]}}, 'format': 'STANDARD_UPDATE', 'servingStatuses': ['STOPPED', 'CAMPAIGN_GROUP_START_DATE_HOLD'], 'type': 'SPONSORED_UPDATES', 'locale': {'country': 'US', 'language': 'en'}, 'version': {'versionTag': '1'}, 'objectiveType': 'LEAD_GENERATION', 'associatedEntity': 'urn:li:organization:166486', 'runSchedule': {'start': 1571788800000}, 'optimizationTargetType': 'MAX_LEAD', 'targeting': {'includedTargetingFacets': {'audienceMatchingSegments': ['urn:li:adSegment:2839623'], 'locations': ['urn:li:country:us'], 'interfaceLocales': [{'country': 'US', 'language': 'en'}]}}, 'offsitePreferences': {'publisherRestrictionFiles': {'exclude': []}, 'iabCategories': {'exclude': []}}, 'changeAuditStamps': {'created': {'time': 1571849531000}, 'lastModified': {'time': 1571849531000}}, 'campaignGroup': 'urn:li:sponsoredCampaignGroup:606984493', 'dailyBudget': {'amount': '50', 'currencyCode': 'USD'}, 'creativeSelection': 'OPTIMIZED', 'costType': 'CPM', 'unitCost': {'amount': '2', 'currencyCode': 'USD'}, 'name': 'Lead generation - Oct 23, 2019', 'offsiteDeliveryEnabled': False, 'id': 156075923, 'audienceExpansionEnabled': True, 'account': 'urn:li:sponsoredAccount:503260043', 'status': 'DRAFT'}
+```
 ## Response
-Here's the sample JSON :
+Here's the sample JSON output which is dumped in to BigQuery:
 ```json
 {
 "account_id": "101234250026264",
