@@ -6,13 +6,9 @@ This is an API which extract data from api.linkedin.com website and pushes it to
 * generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow)
 ## Code flow
 **Step 1:**
-Retrieving all Active campaigns using an API call and use a get request with an access tokens passed in headers for e.g:
+Retrieving all Active campaigns using an API call and use a get request with an access tokens passed in headers for eg:
 ```
-  requests.get('https://api.linkedin.com/v2/adCampaignsV2?q=search'
-                 ##+'&search.status.values[0]=ACTIVE'
-                 + '&search.sponsoredAccount.values[0]=urn:li:sponsoredAccount:507533261'
-                 + '&sort.field=ID&sort.order=DESCENDING',
-                 headers={"Authorization": "Bearer %s" % access_token})
+  requests.get('https://api.linkedin.com/v2/adCampaignsV2?q=search'+'&search.sponsoredAccount.values[0]=urn:li:sponsoredAccount:507533261'+'&sort.field=ID&sort.order=DESCENDING',headers={"Authorization": "Bearer %s" % access_token})
 ```                
 Here's a sample response we get from this call:
 ```json
@@ -20,14 +16,13 @@ Here's a sample response we get from this call:
 ```
 
 Store this result in an array named campaign data and retrieve the campaign ids from this data through id feild in response json and convert this in to a pandas dataframe by providing proper column names
+
+
+
 **Step 2:**
 creating an list of all creative ID's and raw data of creatives of each of the campaigns by using following api call:
 ```
-  requests.get('https://api.linkedin.com/v2/adCreativesV2?q=search'
-                     ##+'&search.status.values[0]=ACTIVE'
-                     + '&search.campaign.values[0]=urn:li:sponsoredCampaign:'
-                     + str(campaign_ids[i])
-                     , headers={"Authorization": "Bearer %s" % TOK_rw_ads})
+  requests.get('https://api.linkedin.com/v2/adCreativesV2?q=search'+'&search.campaign.values[0]=urn:li:sponsoredCampaign:'+str(campaign_ids[i]), headers={"Authorization": "Bearer %s" % TOK_rw_ads})
 ```
 This gives the creative IDs and creative data for that particular campaign. loop through campaign ids to get for all campaigns
 Here's a sample output after appending data into array:
@@ -36,11 +31,19 @@ creative_ids:
 [73122986, 528512552, 36652525]
 
 creative_data:
-
 [{'reference': 'urn:li:share:6579845647539810304', 'variables': {'data': {'com.linkedin.ads.SponsoredUpdateCreativeVariables': {'activity': 'urn:li:activity:6579845647938260992', 'share': 'urn:li:share:6579845647539810304', 'directSponsoredContent': True}}}, 'changeAuditStamps': {'created': {'time': 1568757455000}, 'lastModified': {'time': 1568829436000}}, 'review': {'reviewStatus': 'AUTO_APPROVED'}, 'campaign': 'urn:li:sponsoredCampaign:154790903', 'servingStatuses': ['RUNNABLE'], 'id': 73122986, 'type': 'SPONSORED_STATUS_UPDATE', 'version': {'versionTag': '4'}, 'status': 'ACTIVE'}]
 ```
 Normalise the creative data and convert it in to a pandas dataframe by providing proper column names
 
+
+
+
+**Step 3:**
+Retrieving creative metrics for each creative id using an API:
+```
+https://api.linkedin.com/v2/adAnalyticsV2?q=analytics'+'&pivot=CREATIVE'+'&dateRange.start'+'&dateRange.end'+'+ '&creatives[0]=urn:li:sponsoredCreative:', headers={"Authorization":"Bearer %s" % TOK_ads_reporting}
+```
+Normalise the creative metrics and convert it in to a pandas dataframe by providing proper column names
 ## Response
 Here's the sample JSON output which is dumped in to BigQuery:
 ```json
