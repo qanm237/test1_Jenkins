@@ -43,7 +43,34 @@ Retrieving creative metrics for each creative id using an API:
 ```
 https://api.linkedin.com/v2/adAnalyticsV2?q=analytics'+'&pivot=CREATIVE'+'&dateRange.start'+'&dateRange.end'+'+ '&creatives[0]=urn:li:sponsoredCreative:', headers={"Authorization":"Bearer %s" % TOK_ads_reporting}
 ```
+
+Here's a sample of the creatives data:
+
+
 Normalise the creative metrics and convert it in to a pandas dataframe by providing proper column names
+
+
+
+**Step 4:**
+Applying transformations and creating calculated feilds(cpc,cpm etc) and then joining the creative and campaign data to create intermediate table. This intermediate table is then joined with metrics 
+
+
+
+
+**Step 5:**
+Modifying the final dataframe by performing following operations:
+* Modifying NaN to None and transforming float values to int values
+* Modifying NaN to None for columns which has list of items
+* Modifying inf and NaN values for calculated metrics to None
+* Renaming column names for consistency with facebook
+* replacing columns with biq query naming limitations
+* Transformations according to bq schema for dataframe columns
+* Transforming facetname and facetvalues
+
+
+
+**Step 6:**
+Loading data in gcs bucket and pushing it to Bigquery
 ## Response
 Here's the sample JSON output which is dumped in to BigQuery:
 ```json
