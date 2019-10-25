@@ -9,10 +9,10 @@ Cloud scheduler is used to trigger the linkedin service deployed in app engine t
 *history: this defines the type of load(historical or incremental). It is true for historical and false for incremental  
 
 
-**Following parameters are to be passed to the function which fetches data for linkedin:**
-*Start date : This is the start date for which you want to pull the data
-*End date : This is the end date for which you want to pull the data 
-*Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
+Following parameters are to be passed to the function which fetches data for linkedin:
+* Start date : This is the start date for which you want to pull the data
+* End date : This is the end date for which you want to pull the data 
+* Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
 *accces tokens : This is required for authentication for api calls 
 
 
