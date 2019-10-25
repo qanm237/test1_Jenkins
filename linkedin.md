@@ -1,9 +1,26 @@
 # Linkedin  API description
 This is an API which extract data from api.linkedin.com website and pushes it to bigquery
+
+
+## Understanding the pipeline flow and API request
+
+Cloud scheduler is used to trigger the linkedin service deployed in app engine through HTTP post request with following two parameters :
+*service name i.e linkedin
+*history: this defines the type of load(historical or incremental). It is true for historical and false for incremental  
+
+
+**Following parameters are to be passed to the function which fetches data for linkedin:**
+*Start date : This is the start date for which you want to pull the data
+*End date : This is the end date for which you want to pull the data 
+*Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
+*accces tokens : This is required for authentication for api calls 
+
+
 ## Requirements
 **Complete these following requirements:**
 * create a [developer profile](https://www.linkedin.com/developers/) 
-* generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow)
+* generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow). This token t
+  needs to be refreshed every 51 days 
 ## Code flow
 **Step 1:**
 Retrieving all Active campaigns using an API call and use a get request with an access tokens passed in headers for eg:
