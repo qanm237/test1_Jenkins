@@ -2,18 +2,12 @@
 This is an API which extract data from api.linkedin.com website and pushes it to bigquery
 
 
-## Understanding the pipeline flow and API request
+## Understanding the pipeline flow
 
 Cloud scheduler is used to trigger the linkedin service deployed in app engine through HTTP post request with following two parameters :
 * service name i.e linkedin
 * history: this defines the type of load(historical or incremental). It is true for historical and false for incremental  
 
-
-Following parameters are to be passed to the function which fetches data for linkedin:
-* Start date : This is the start date for which you want to pull the data
-* End date : This is the end date for which you want to pull the data 
-* Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
-* accces tokens : This is required for authentication for api calls 
 
 
 ## Requirements
@@ -22,6 +16,14 @@ Following parameters are to be passed to the function which fetches data for lin
 * generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow). This token t
   needs to be refreshed every 51 days 
 ## Code flow
+
+**Following parameters are to be passed to the function which fetches data for linkedin:**
+* Start date : This is the start date for which you want to pull the data
+* End date : This is the end date for which you want to pull the data 
+* Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
+* accces tokens : This is required for authentication for api calls 
+
+
 **Step 1:**
 Retrieving all Active campaigns using an API call and use a get request with an access tokens passed in headers for eg:
 ```
@@ -45,10 +47,10 @@ This gives the creative IDs and creative data for that particular campaign. loop
 Here's a sample output after appending data into array:
 ```
 creative_ids:
-[73122986, 528512552, 36652525]
+[9089805, 528512552, 36652525]
 
 creative_data:
-[{'reference': 'urn:li:share:6579845647539810304', 'variables': {'data': {'com.linkedin.ads.SponsoredUpdateCreativeVariables': {'activity': 'urn:li:activity:6579845647938260992', 'share': 'urn:li:share:6579845647539810304', 'directSponsoredContent': True}}}, 'changeAuditStamps': {'created': {'time': 1568757455000}, 'lastModified': {'time': 1568829436000}}, 'review': {'reviewStatus': 'AUTO_APPROVED'}, 'campaign': 'urn:li:sponsoredCampaign:154790903', 'servingStatuses': ['RUNNABLE'], 'id': 73122986, 'type': 'SPONSORED_STATUS_UPDATE', 'version': {'versionTag': '4'}, 'status': 'ACTIVE'}]
+[{'reference': 'urn:li:share:565858', 'variables': {'data': {'com.linkedin.ads.SponsoredUpdateCreativeVariables': {'activity': 'urn:li:activity:865876969', 'share': 'urn:li:share:6579845647539810304', 'directSponsoredContent': True}}}, 'changeAuditStamps': {'created': {'time': 1568757455000}, 'lastModified': {'time': 1568829436000}}, 'review': {'reviewStatus': 'AUTO_APPROVED'}, 'campaign': 'urn:li:sponsoredCampaign:154790903', 'servingStatuses': ['RUNNABLE'], 'id': 7698709, 'type': 'SPONSORED_STATUS_UPDATE', 'version': {'versionTag': '4'}, 'status': 'ACTIVE'}]
 ```
 Normalise the creative data and convert it in to a pandas dataframe by providing proper column names
 
@@ -61,7 +63,12 @@ Retrieving creative metrics for each creative id using an API:
 https://api.linkedin.com/v2/adAnalyticsV2?q=analytics'+'&pivot=CREATIVE'+'&dateRange.start'+'&dateRange.end'+'+ '&creatives[0]=urn:li:sponsoredCreative:', headers={"Authorization":"Bearer %s" % TOK_ads_reporting}
 ```
 
-Here's a sample of the creatives data:
+Here's a sample of the creative metrics:
+```json
+[{ "reference": "urn:li:share:6579845647539810304", "variables": { "data": { "com.linkedin.ads.SponsoredUpdateCreativeVariables": { "activity": "urn:li:activity:6579845647938260992", "share": "urn:li:share:6579845647539810304", "directSponsoredContent": "TRUE" } } }, "changeAuditStamps": { "created": { "time": 1568757455000 }, "lastModified": { "time": 1568757455000 } }, "review": { "reviewStatus": "PENDING" }, "campaign": "urn:li:sponsoredCampaign:154790903", "servingStatuses": ["UNDER_REVIEW"], "id": 73122986, "type": "SPONSORED_STATUS_UPDATE", "version": { "versionTag": "1" }, "status": "ACTIVE" }]
+```
+
+
 
 
 Normalise the creative metrics and convert it in to a pandas dataframe by providing proper column names
@@ -92,13 +99,13 @@ Loading data in gcs bucket and pushing it to Bigquery
 Here's the sample JSON output which is dumped in to BigQuery:
 ```json
 {
-"account_id": "101234250026264",
-"account_name": "Transamerica",
-"campaign_name": "Retirement - App/Tim Howard Video Views - Jun-Dec19",
-"campaign_id": "6129856732370",
-"adset_name": "Retirement - App/Tim Howard Video Views - Jun-Oct19 - IG Soccer Fans",
-"adset_id": "6129858974370",
-"ad_name": "Video - Tim Howard - 15-Sec Phase 1",
+"account_id": "10122500651584",
+"account_name": "dsvd",
+"campaign_name": "Retirement - Apps - Jun-Dec19",
+"campaign_id": "432432564279",
+"adset_name": "Retirement - Apps - Jun-Oct19 - IG Soccer Fans",
+"adset_id": "087664653889",
+"ad_name": "Video sbfdjsb,sdf",
 "ad_id": "6129859948570",
 "buying_type": "AUCTION",
 "spend": "0.27",
