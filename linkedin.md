@@ -13,8 +13,7 @@ Cloud scheduler is used to trigger the linkedin service deployed in app engine t
 ## Requirements
 **Complete these following requirements:**
 * create a [developer profile](https://www.linkedin.com/developers/) 
-* generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow). This token t
-  needs to be refreshed every 51 days 
+* generate an [access token](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow). This token needs to be refreshed every 51 days 
 ## Code flow
 
 **Following parameters are to be passed to the function which fetches data for linkedin:**
