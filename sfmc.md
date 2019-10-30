@@ -1,11 +1,12 @@
 # SFMC API description
 This is an API which extract data from marketing cloud website and pushes it to bigquery
 
-** There are two types of load types:**
+**There are two types of load types:**
 * Historical load
 * Incremental load
 
-##HISTORICAL LOGIC:
+## HISTORICAL LOGIC:
+
 Takes 3 parameters: 
 * Load-type 
 * Start-date
@@ -33,7 +34,7 @@ Sample :
 
 ```
 
-##INCREMENTAL LOAD LOGIC :
+## INCREMENTAL LOAD LOGIC :
 * Get the latest date using metadata table and calculate the date of week before
 * Then send the SOAP request for the date greater than the date for last week. Then same as that of historical load
 
