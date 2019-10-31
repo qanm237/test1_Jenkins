@@ -46,5 +46,12 @@ Takes 3 parameters:
 
 ```
 
+## Response from SOAP request
+Here's the sample response of clickevents:
+```
+{"MID": "754747332", "PartnerKey": "", "SendID": "74732", "SubscriberKey": "ghchjgwdvjxv", "EventDate": "2019-01-04T09:20:08", "EventType": "Click", "TriggeredSendDefinitionObjectID": "", "BatchID": "1", "URLID": "8787263", "URL": "https://3jrfdkgjvkxhwvxhwdxvmwxmwdbxbcvwbc,"}
+
+```
+
 
 ## Version: v1
