@@ -1,6 +1,10 @@
 # SFMC API description
 This is an API which extract data from marketing cloud website and pushes it to bigquery
 
+**There are 6 possible endpoints for this service:**
+* /load_click_events :
+ Method to retrieve data for click events . returns: Json object with status whether the execution has been successful or failed 
+
 **There are two types of load types:**
 * Historical load
 * Incremental load
