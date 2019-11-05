@@ -21,7 +21,7 @@ This is an API which extract data from marketing cloud website and pushes it to 
  Method to retrieve data for triggeredsendsummary. returns: Json object with status whether the execution has been successful or failed. no payload
 
 
-**These endpoints are triggered through cloud sheduler HTTP post method. payload to these endpoints include:
+**These endpoints are triggered through cloud sheduler HTTP post method. payload to these endpoints include:**
 * load_type :This is the type of load. It can be "Incremental" or "historical"
 * start_date :start date for which you want to pull data.
 * count :number of records you want to pull 
