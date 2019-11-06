@@ -1,7 +1,15 @@
 # SFMC API description
 This is an API which extract data from marketing cloud website and pushes it to bigquery
 
-**There are 6 possible endpoints for this service. These endpoints are triggered through cloud sheduler HTTP post method. Below table describes endpoints:**
+**There are 6 possible endpoints for this service. These endpoints are triggered through cloud sheduler HTTP post method.Payload consists of :**
+
+* load_type :This is the type of load. It can be "Incremental" or "historical"
+* start_date :start date for which you want to pull data.
+* count :number of records you want to pull 
+
+
+
+**Endpoints**
 
 ### /load_click_events
 
@@ -10,7 +18,7 @@ This is an API which extract data from marketing cloud website and pushes it to 
 
 Method to retrieve data for click events. returns a json object with status whether the execution has been successful or failed 
 
-##### Payload Sample:
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
 {"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
 ```
@@ -28,7 +36,7 @@ Method to retrieve data for click events. returns a json object with status whet
 
 Method to retrieve data for bounce events. returns a json object with status whether the execution has been successful or failed 
 
-##### Payload Sample:
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
 {"load_type":"Historical","start_date":"2018-11-01","count":"5"}
 ```
@@ -46,7 +54,7 @@ Method to retrieve data for bounce events. returns a json object with status whe
 
 Method to retrieve data for sent events. returns a json object with status whether the execution has been successful or failed 
 
-##### Payload Sample:
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
 {"load_type":"Incremental","start_date":"2019-07-11","count":"3"}
 ```
@@ -56,6 +64,62 @@ Method to retrieve data for sent events. returns a json object with status wheth
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Success'} |
 | 400 | Failure in  loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_send
+
+#### POST
+##### Summary:
+
+Method to retrieve data for sends. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"load_type":"Incremental"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of send data to Bigquery | {'type':'send', 'status': 'Success'} |
+| 400 | Failure in  loading of send data to Bigquery | {'type':'send', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_triggeredsenddefinitions
+
+#### GET
+##### Summary:
+
+Method to retrieve data for triggeredsenddefinitions. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of triggeredsenddefinitions data to Bigquery | {'type':'triggeredsenddefinitions', 'status': 'Success'} |
+| 400 | Failure in  loading of triggeredsenddefinitions data to Bigquery | {'type':'triggeredsenddefinitions', 'status': 'Fail', 'message': 'URL not found' |
+
+
+### /load_triggeredsendsummary
+
+#### GET
+##### Summary:
+
+Method to retrieve data for triggeredsendsummary. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Success'} |
+| 400 | Failure in  loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Fail', 'message': 'URL not found' |
+
 
 
 
