@@ -3,14 +3,20 @@ This is an API which extract data from marketing cloud website and pushes it to 
 
 **There are 6 possible endpoints for this service:**
 
-| Endoint | Description |
-| ------ | ------ |
-| load_click_events | Method to retrieve data for click events |
-| load_bounce_eventstHub | Method to retrieve data for bounce event |
-| load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions |
-| load_sent_events | Method to retrieve data for sent events |
-| load_send | Method to retrieve data for sends |
-| load_triggeredsendsummary |  Method to retrieve data for triggeredsendsummary |
+| Endoint | Description | Payload from scheduler |
+| ------ | ------ | ------ |
+| load_click_events | Method to retrieve data for click events | load_type, start_date, count |
+| load_bounce_eventstHub | Method to retrieve data for bounce event | load_type, start_date, count | 
+| load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions | No payload |
+| load_sent_events | Method to retrieve data for sent events | load_type, start_date, count |
+| load_send | Method to retrieve data for sends | load_type |
+| load_triggeredsendsummary |  Method to retrieve data for triggeredsendsummary | No payload |
+
+Sample Payload(click events):
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
+All these endpoints returns a json object with status whether the execution has been successful or failed 
 
 * /load_click_events :
  Method to retrieve data for click events .returns: Json object with status whether the execution has been successful or failed 
