@@ -5,7 +5,9 @@ This is an API which extract data from marketing cloud website and pushes it to 
 
 * load_type :This is the type of load. It can be "Incremental" or "historical"
 * start_date :start date for which you want to pull data.
-* count :number of records you want to pull 
+* count :variable used to prevent the deletion of the tables in bigquery due to parallel processing. it has two values:
+  * 1 : which signifies that the table should be deleted and created again and updated
+  * 2 : which signifies that the data should be apended in already exsisting table
 
 
 
@@ -38,7 +40,7 @@ Method to retrieve data for bounce events. returns a json object with status whe
 
 ##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
-{"load_type":"Historical","start_date":"2018-11-01","count":"5"}
+{"load_type":"Historical","start_date":"2018-11-01","count":"2"}
 ```
 ##### Responses
 
@@ -56,7 +58,7 @@ Method to retrieve data for sent events. returns a json object with status wheth
 
 ##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
-{"load_type":"Incremental","start_date":"2019-07-11","count":"3"}
+{"load_type":"Incremental","start_date":"2019-07-11","count":"2"}
 ```
 ##### Responses
 
@@ -64,6 +66,197 @@ Method to retrieve data for sent events. returns a json object with status wheth
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Success'} |
 | 400 | Failure in  loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_open_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for open events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of open events data to Bigquery | {'type':'open_event', 'status': 'Success'} |
+| 400 | Failure in  loading of open events data to Bigquery | {'type':'open_event', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_unsub_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for unsub events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of unsub events data to Bigquery | {'type':'unsub_event', 'status': 'Success'} |
+| 400 | Failure in  loading of unsub events data to Bigquery | {'type':'unsub_event', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_notsent_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for notsent events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of notsent events data to Bigquery | {'type':'NotSentevent', 'status': 'Success'} |
+| 400 | Failure in  loading of notsent events data to Bigquery | {'type':'NotSentevent', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_subscriber_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for subscriber events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of Subscriber events data to Bigquery | {'type':'Subscriber', 'status': 'Success'} |
+| 400 | Failure in  loading of Subscriber events data to Bigquery | {'type':'Subscriber', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_journey_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for journey events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of journey events data to Bigquery | {'type':'journeyevent', 'status': 'Success'} |
+| 400 | Failure in  loading of journey events data to Bigquery | {'type':'journeyevent', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_data_extension
+
+#### POST
+##### Summary:
+
+Method to retrieve data for data_extension events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of data_extension events data to Bigquery | {'type':'Data Extension Object', 'status': 'Success'} |
+| 400 | Failure in  loading of data_extension events data to Bigquery | {'type':'Data Extension Object', 'status': 'Fail', 'message': 'URL not found' |
+
+
+### /load_data_extension_field
+
+#### POST
+##### Summary:
+
+Method to retrieve data for data_extension_field events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of data_extension_field events data to Bigquery | {'type':'data extension field', 'status': 'Success'} |
+| 400 | Failure in  loading of data_extension_field events data to Bigquery | {'type':'data extension field', 'status': 'Fail', 'message': 'URL not found' |
+
+
+### /load_email_send_definition
+
+#### POST
+##### Summary:
+
+Method to retrieve data for email_send_definition events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of email_send_definition events data to Bigquery | {'type':'email send definition', 'status': 'Success'} |
+| 400 | Failure in  loading of email_send_definition events data to Bigquery | {'type':'email send definition', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_linksend_event
+
+#### POST
+##### Summary:
+
+Method to retrieve data for linksend_event events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+No Payload
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of linksend events data to Bigquery | {'type':'linksend', 'status': 'Success'} |
+| 400 | Failure in  loading of linksend events data to Bigquery | {'type':'linksend', 'status': 'Fail', 'message': 'URL not found'|
+
+
+### /create_task_queue_historical
+
+#### POST
+##### Summary:
+
+Method to create task queue for running historical for events in parallel
+:return: Json object with status whether the execution has been successful or failed
+Object_type should be similar to object name written in sfmc marketing cloud api website
+load_type should be historical
+start date should be in format YYYY-MM-DD
+##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
+```sh
+{"obj_name":"click_event","load_type":"Historical","start_date":"2016-12-01","count":"2"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of linksend events data to Bigquery | {'type':'create_task_queue_historical', 'status': 'Success', "method": "post", "load_type": "Historical","object_type":"click_events","start_date":"2016-12-01"} |
+| 400 | Failure in  loading of linksend events data to Bigquery | {'type':'create_task_queue_historical', 'status': 'Success', "method": "post", "load_type": "Historical","object_type":"click_events","start_date":"2016-12-01", "message":"URL not found"} |
+
+> This method is currently not in use and is depreceated. For Historical load endpoints for respective events are used by passing load_type as    "Historical" and start date as "2016-12-01"
+
+
+
 
 ### /load_send
 
