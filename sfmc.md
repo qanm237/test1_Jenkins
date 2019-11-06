@@ -5,11 +5,15 @@ This is an API which extract data from marketing cloud website and pushes it to 
 
 ### /load_click_events
 
-#### GET
+#### POST
 ##### Summary:
 
 Method to retrieve data for click events. returns a json object with status whether the execution has been successful or failed 
 
+##### Payload Sample:
+```sh
+{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
+```
 ##### Responses
 
 | Code | Description | Sample |
@@ -17,11 +21,48 @@ Method to retrieve data for click events. returns a json object with status whet
 | 200 | Successful loading of click events data to Bigquery | {'type':'click_event', 'status': 'Success'} |
 | 400 | Failure in  loading of click events data to Bigquery | {'type':'click_event', 'status': 'Fail', 'message': 'URL not found' |
 
+### /load_bounce_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for bounce events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample:
+```sh
+{"load_type":"Historical","start_date":"2018-11-01","count":"5"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of bounce events data to Bigquery | {'type':'bounce_event', 'status': 'Success'} |
+| 400 | Failure in  loading of bounce events data to Bigquery | {'type':'bounce_event', 'status': 'Fail', 'message': 'URL not found' |
+
+### /load_sent_events
+
+#### POST
+##### Summary:
+
+Method to retrieve data for sent events. returns a json object with status whether the execution has been successful or failed 
+
+##### Payload Sample:
+```sh
+{"load_type":"Incremental","start_date":"2019-07-11","count":"3"}
+```
+##### Responses
+
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Success'} |
+| 400 | Failure in  loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Fail', 'message': 'URL not found' |
+
+
 
 | Endoint | Description | Payload from scheduler |
 | ------ | ------ | ------ |
 | load_click_events | Method to retrieve data for click events | load_type, start_date, count |
-| load_bounce_eventstHub | Method to retrieve data for bounce event | load_type, start_date, count | 
+| load_bounce_events | Method to retrieve data for bounce event | load_type, start_date, count | 
 | load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions | No payload |
 | load_sent_events | Method to retrieve data for sent events | load_type, start_date, count |
 | load_send | Method to retrieve data for sends | load_type |
@@ -35,11 +76,6 @@ All these endpoints returns a json object with status whether the execution has 
 
  
 ## HISTORICAL LOAD LOGIC:
-
-Takes 3 parameters: 
-* Load-type 
-* Start-date
-* Count
 
 **Process:**
 * First the start date is taken and an end date is calculated by adding 3 months into it
