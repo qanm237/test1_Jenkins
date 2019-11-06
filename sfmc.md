@@ -1,7 +1,7 @@
 # SFMC API description
 This is an API which extract data from marketing cloud website and pushes it to bigquery
 
-**There are 6 possible endpoints for this service:**
+**There are 6 possible endpoints for this service. These endpoints are triggered through cloud sheduler HTTP post method. Below table describes endpoints:**
 
 | Endoint | Description | Payload from scheduler |
 | ------ | ------ | ------ |
@@ -18,29 +18,7 @@ Sample Payload(click events):
 ```
 All these endpoints returns a json object with status whether the execution has been successful or failed 
 
-* /load_click_events :
- Method to retrieve data for click events .returns: Json object with status whether the execution has been successful or failed 
-
-* /load_bounce_events :
- Method to retrieve data for bounce event. returns: Json object with status whether the execution has been successful or failed
-
-* /load_triggeredsenddefinitions :
- Method to retrieve data for triggeredsend definitions. returns: Json object with status whether the execution has been successful or failed. no payload
-
-* /load_sent_events :
- Method to retrieve data for sent events. returns: Json object with status whether the execution has been successful or failed 
-
-* /load_send :
- Method to retrieve data for sends. returns: Json object with status whether the execution has been successful or failed. payload includes only load type
-
-* /load_triggeredsendsummary :
- Method to retrieve data for triggeredsendsummary. returns: Json object with status whether the execution has been successful or failed. no payload
-
-
-**These endpoints are triggered through cloud sheduler HTTP post method. payload to these endpoints include:**
-* load_type :This is the type of load. It can be "Incremental" or "historical"
-* start_date :start date for which you want to pull data.
-* count :number of records you want to pull 
+ 
 ## HISTORICAL LOAD LOGIC:
 
 Takes 3 parameters: 
