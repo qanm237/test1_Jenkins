@@ -3,6 +3,21 @@ This is an API which extract data from marketing cloud website and pushes it to 
 
 **There are 6 possible endpoints for this service. These endpoints are triggered through cloud sheduler HTTP post method. Below table describes endpoints:**
 
+### /load_click_events
+
+#### GET
+##### Summary:
+
+Method to retrieve data for click events
+
+##### Responses
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Successful loading of click events data to Bigquery |
+| 400 | Failure in  loading of click events data to Bigquery |
+
+
 | Endoint | Description | Payload from scheduler |
 | ------ | ------ | ------ |
 | load_click_events | Method to retrieve data for click events | load_type, start_date, count |
