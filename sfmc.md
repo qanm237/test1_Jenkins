@@ -8,14 +8,14 @@ This is an API which extract data from marketing cloud website and pushes it to 
 #### GET
 ##### Summary:
 
-Method to retrieve data for click events
+Method to retrieve data for click events. returns a json object with status whether the execution has been successful or failed 
 
 ##### Responses
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful loading of click events data to Bigquery |
-| 400 | Failure in  loading of click events data to Bigquery |
+| Code | Description | Sample |
+| ---- | ----------- | ----------- |
+| 200 | Successful loading of click events data to Bigquery | {'type':'click_event', 'status': 'Success'} |
+| 400 | Failure in  loading of click events data to Bigquery | {'type':'click_event', 'status': 'Fail', 'message': 'URL not found' |
 
 
 | Endoint | Description | Payload from scheduler |
