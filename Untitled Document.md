@@ -73,14 +73,14 @@ $ NODE_ENV=production node app
 
 Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
 
-| Plugin | README |
+| Endoint | Description |
 | ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
+| load_click_events | Method to retrieve data for click events |
+| load_bounce_eventstHub | Method to retrieve data for bounce event |
+| load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions |
+| load_sent_events | Method to retrieve data for sent events |
+| load_send | Method to retrieve data for sends |
+| load_triggeredsendsummary |  Method to retrieve data for triggeredsendsummary |
 
 
 ### Development
