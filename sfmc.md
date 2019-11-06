@@ -2,6 +2,16 @@
 This is an API which extract data from marketing cloud website and pushes it to bigquery
 
 **There are 6 possible endpoints for this service:**
+| Endoint | Description |
+| ------ | ------ |
+| load_click_events | Method to retrieve data for click events .returns |
+| load_bounce_eventstHub | Method to retrieve data for bounce event |
+| load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions |
+| load_sent_events | Method to retrieve data for sent events |
+| load_send | Method to retrieve data for sends |
+| load_triggeredsendsummary |  Method to retrieve data for triggeredsendsummary |
+
+
 * /load_click_events :
  Method to retrieve data for click events .returns: Json object with status whether the execution has been successful or failed 
 
