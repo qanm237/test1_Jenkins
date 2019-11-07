@@ -312,25 +312,6 @@ No Payload
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Success'} |
 | 400 | Failure in  loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Fail', 'message': 'URL not found' |
-
-
-
-
-| Endoint | Description | Payload from scheduler |
-| ------ | ------ | ------ |
-| load_click_events | Method to retrieve data for click events | load_type, start_date, count |
-| load_bounce_events | Method to retrieve data for bounce event | load_type, start_date, count | 
-| load_triggeredsenddefinitions | Method to retrieve data for triggeredsend definitions | No payload |
-| load_sent_events | Method to retrieve data for sent events | load_type, start_date, count |
-| load_send | Method to retrieve data for sends | load_type |
-| load_triggeredsendsummary |  Method to retrieve data for triggeredsendsummary | No payload |
-
-Sample Payload(click events):
-```sh
-{"load_type":"Incremental","start_date":"2019-01-01","count":"2"}
-```
-All these endpoints returns a json object with status whether the execution has been successful or failed 
-
  
 ## HISTORICAL LOAD LOGIC:
 
