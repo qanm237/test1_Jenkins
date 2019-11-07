@@ -24,22 +24,12 @@ This is an API which extract data from api.linkedin.com website and pushes it to
 
 | Code | Description | Sample respose in BigQuery notification table |
 | ---- | ----------- | ----------- |
-| 200 | Successful loading of linkedin data to Bigquery | {
-            'JobID': 167312,
-            'Source': 'Facebook',
-            'Subject': 'TA App Job success',
-            'Message': 'Facebook data loaded successfully for date: 1/2/2019 Successfully inserted 10 rows in Bigquery table xyz'
-            } |
-| 400 | Failure in  loading of linkedin data to Bigquery | {
-            'JobID': 167312,
-            'Source': 'Facebook',
-            'Subject': 'TA App Job failure',
-            'Message': 'cannot cast str into int'
-            } |
+| 200 | Successful loading of linkedin data to Bigquery | {'JobID': 167312,'Source': 'Facebook','Subject': 'TA App Job success','Message':      'Facebook data loaded successfully for date: 1/2/2019 Successfully inserted 10 rows in Bigquery table xyz'} |
+| 400 | Failure in  loading of linkedin data to Bigquery | {'JobID': 167312,'Source': 'Facebook','Subject': 'TA App Job failure','Message': 'cannot cast str into int'} |
 
-##### Internal code logic
+**Internal code logic**
 
-**Following parameters are to be passed to the function which fetches data for linkedin:**
+##### Following parameters are to be passed to the function which fetches data for linkedin:
 * Start date : This is the start date for which you want to pull the data
 * End date : This is the end date for which you want to pull the data 
 * Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
