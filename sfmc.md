@@ -31,6 +31,8 @@ Method to retrieve data for click events. returns a json object with status whet
 | 200 | Successful loading of click events data to Bigquery | {'type':'click_event', 'status': 'Success'} |
 | 400 | Failure in  loading of click events data to Bigquery | {'type':'click_event', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_bounce_events
 
 #### POST
@@ -48,6 +50,8 @@ Method to retrieve data for bounce events. returns a json object with status whe
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of bounce events data to Bigquery | {'type':'bounce_event', 'status': 'Success'} |
 | 400 | Failure in  loading of bounce events data to Bigquery | {'type':'bounce_event', 'status': 'Fail', 'message': 'URL not found' |
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 ### /load_sent_events
 
@@ -67,6 +71,8 @@ Method to retrieve data for sent events. returns a json object with status wheth
 | 200 | Successful loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Success'} |
 | 400 | Failure in  loading of sent events data to Bigquery | {'type':'sent_event', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_open_events
 
 #### POST
@@ -84,6 +90,8 @@ Method to retrieve data for open events. returns a json object with status wheth
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of open events data to Bigquery | {'type':'open_event', 'status': 'Success'} |
 | 400 | Failure in  loading of open events data to Bigquery | {'type':'open_event', 'status': 'Fail', 'message': 'URL not found' |
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 ### /load_unsub_events
 
@@ -103,6 +111,8 @@ Method to retrieve data for unsub events. returns a json object with status whet
 | 200 | Successful loading of unsub events data to Bigquery | {'type':'unsub_event', 'status': 'Success'} |
 | 400 | Failure in  loading of unsub events data to Bigquery | {'type':'unsub_event', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_notsent_events
 
 #### POST
@@ -120,6 +130,8 @@ Method to retrieve data for notsent events. returns a json object with status wh
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of notsent events data to Bigquery | {'type':'NotSentevent', 'status': 'Success'} |
 | 400 | Failure in  loading of notsent events data to Bigquery | {'type':'NotSentevent', 'status': 'Fail', 'message': 'URL not found' |
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 ### /load_subscriber_events
 
@@ -139,6 +151,8 @@ Method to retrieve data for subscriber events. returns a json object with status
 | 200 | Successful loading of Subscriber events data to Bigquery | {'type':'Subscriber', 'status': 'Success'} |
 | 400 | Failure in  loading of Subscriber events data to Bigquery | {'type':'Subscriber', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_journey_events
 
 #### POST
@@ -157,6 +171,8 @@ No Payload
 | 200 | Successful loading of journey events data to Bigquery | {'type':'journeyevent', 'status': 'Success'} |
 | 400 | Failure in  loading of journey events data to Bigquery | {'type':'journeyevent', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_data_extension
 
 #### POST
@@ -174,6 +190,8 @@ No Payload
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of data_extension events data to Bigquery | {'type':'Data Extension Object', 'status': 'Success'} |
 | 400 | Failure in  loading of data_extension events data to Bigquery | {'type':'Data Extension Object', 'status': 'Fail', 'message': 'URL not found' |
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 
 ### /load_data_extension_field
@@ -194,6 +212,7 @@ No Payload
 | 200 | Successful loading of data_extension_field events data to Bigquery | {'type':'data extension field', 'status': 'Success'} |
 | 400 | Failure in  loading of data_extension_field events data to Bigquery | {'type':'data extension field', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 ### /load_email_send_definition
 
@@ -213,6 +232,8 @@ No Payload
 | 200 | Successful loading of email_send_definition events data to Bigquery | {'type':'email send definition', 'status': 'Success'} |
 | 400 | Failure in  loading of email_send_definition events data to Bigquery | {'type':'email send definition', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_linksend_event
 
 #### POST
@@ -231,6 +252,7 @@ No Payload
 | 200 | Successful loading of linksend events data to Bigquery | {'type':'linksend', 'status': 'Success'} |
 | 400 | Failure in  loading of linksend events data to Bigquery | {'type':'linksend', 'status': 'Fail', 'message': 'URL not found'|
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 ### /create_task_queue_historical
 
@@ -276,6 +298,8 @@ Method to retrieve data for sends. returns a json object with status whether the
 | 200 | Successful loading of send data to Bigquery | {'type':'send', 'status': 'Success'} |
 | 400 | Failure in  loading of send data to Bigquery | {'type':'send', 'status': 'Fail', 'message': 'URL not found' |
 
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ### /load_triggeredsenddefinitions
 
 #### GET
@@ -293,6 +317,8 @@ No Payload
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of triggeredsenddefinitions data to Bigquery | {'type':'triggeredsenddefinitions', 'status': 'Success'} |
 | 400 | Failure in  loading of triggeredsenddefinitions data to Bigquery | {'type':'triggeredsenddefinitions', 'status': 'Fail', 'message': 'URL not found' |
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 
 ### /load_triggeredsendsummary
@@ -312,7 +338,9 @@ No Payload
 | ---- | ----------- | ----------- |
 | 200 | Successful loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Success'} |
 | 400 | Failure in  loading of triggeredsendsummary data to Bigquery | {'type':'triggeredsendsummary', 'status': 'Fail', 'message': 'URL not found' |
- 
+
+> **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
+
 ## HISTORICAL LOAD LOGIC:
 
 **Process:**
