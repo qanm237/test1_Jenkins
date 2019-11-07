@@ -8,7 +8,7 @@ This is an API which extract data from socials website and pushes it to bigquery
 * service name i.e linkedin or facebook
 * history: this defines the type of load(historical or incremental). It is true for historical and false for incremental  
 
-**Endpoint for linkedin**
+## Endpoint for linkedin
 
 ## /linkedindata
 
@@ -30,7 +30,7 @@ This is an API which extract data from api.linkedin.com website and pushes it to
 > **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 
-**Endpoint for facebook**
+## Endpoint for facebook
 
 ## /facebookdata
 
