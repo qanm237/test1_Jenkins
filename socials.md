@@ -8,19 +8,19 @@ This is an API which extract data from socials website and pushes it to bigquery
 * service name i.e linkedin or facebook
 * history: this defines the type of load(historical or incremental). It is true for historical and false for incremental  
 
-**Endpoints**
+**Endpoint for linkedin**
 
-### /linkedindata
+## /linkedindata
 
 #### POST
-##### Summary:
+### Summary:
 
 This is an API which extract data from api.linkedin.com website and pushes it to bigquery
 ##### Payload Sample(This is the payload which is sent to trigger the app engine endpoint through scheduler through HTTP post request):
 ```sh
 {"medianame": "linkedin", "history": "False"}
 ```
-##### Responses
+#### Responses
 
 | Code | Description | Sample respose in BigQuery notification table |
 | ---- | ----------- | ----------- |
@@ -30,11 +30,12 @@ This is an API which extract data from api.linkedin.com website and pushes it to
 > **NOTE:**  Response obtained from the app engine service is always 'OK', 200. the actual status of the jobs are stored in the notifications     table in BigQuery for monitoring purpose
 
 
+**Endpoint for facebook**
 
-### /facebookdata
+## /facebookdata
 
 #### POST
-##### Summary:
+#### Summary:
 
 This is an API which extract data from api.facebook.com website and pushes it to bigquery
 
@@ -42,7 +43,7 @@ This is an API which extract data from api.facebook.com website and pushes it to
 ```sh
 {"medianame": "facebook", "history": "False"}
 ```
-##### Responses
+#### Responses
 
 | Code | Description | Sample respose in BigQuery notification table |
 | ---- | ----------- | ----------- |
@@ -55,7 +56,7 @@ This is an API which extract data from api.facebook.com website and pushes it to
 
 **Internal code logic for linkedin**
 
-##### Following parameters are to be passed to the function which fetches data for linkedin:
+#### Following parameters are to be passed to the function which fetches data for linkedin:
 * Start date : This is the start date for which you want to pull the data
 * End date : This is the end date for which you want to pull the data 
 * Date index :This defines the time range for which the date is to be fetched. Basically splits the total data into small chunks
@@ -133,7 +134,7 @@ Modifying the final dataframe by performing following operations:
 
 **Step 6:**
 Loading data in gcs bucket and pushing it to Bigquery
-#### Response
+### Response
 Here's the sample JSON output which is dumped in to BigQuery:
 ```json
 { "account_id": "10122500651584", "account_name": "dsvd", "campaign_name": "jhfjhegqwjh", "campaign_id": "432432564279", "adset_name": "wfbwkfbw,jbf,", "adset_id": "087664653889", "ad_name": "Video sbfdjsb,sdf", "ad_id": "6129859948570", "buying_type": "AUCTION", "spend": "0.27", "objective": "VIDEO_VIEWS", "clicks": "0", "impressions": "53", "cpc": null, "cpm": "5.09434", "cpp": "5.09434", "ctr": "0", "frequency": "1", "unique_clicks": "0", "unique_ctr": "0", "unique_inline_link_click_ctr": null, "unique_inline_link_clicks": null, "unique_link_clicks_ctr": null, "cost_per_inline_link_click": null, "cost_per_inline_post_engagement": null, "reach": "53", "inline_link_clicks": null, "inline_link_click_ctr": null, "cost_per_estimated_ad_recallers": "0.27", "ad_status": "active", "cost_per_unique_click": null, "cost_per_unique_inline_link_click": null, "outbound_clicks": [ { "action_type": null, "value": null } ], "outbound_clicks_ctr": [ { "action_type": null, "value": null } ], "cost_per_10_sec_video_view": [ { "action_type": "video_view", "value": "0.038571" } ], "cost_per_action_type": [ { "action_type": "video_view", "value": "0.027" }, { "action_type": "post_engagement", "value": "0.027" }, { "action_type": "page_engagement", "value": "0.027" } ], "cost_per_outbound_click": [ { "action_type": null, "value": null } ], "cost_per_unique_action_type": [ { "action_type": "video_view", "value": "0.027" }, { "action_type": "post_engagement", "value": "0.027" }, { "action_type": "page_engagement", "value": "0.027" } ], "cost_per_unique_outbound_click": [ { "action_type": null, "value": null } ], "unique_outbound_clicks_ctr": [ { "action_type": null, "value": null } ], "unique_outbound_clicks": [ { "action_type": null, "value": null } ], "actions": [ { "action_type": "video_view", "value": "10" }, { "action_type": "post_engagement", "value": "10" }, { "action_type": "page_engagement", "value": "10" } ], "video_10_sec_watched_actions": [ { "action_type": "video_view", "value": "7" } ], "video_30_sec_watched_actions": [ { "action_type": "video_view", "value": "1" } ], "video_avg_time_watched_actions": [ { "action_type": "video_view", "value": "4" } ], "video_p100_watched_actions": [ { "action_type": "video_view", "value": "1" } ], "video_p25_watched_actions": [ { "action_type": "video_view", "value": "7" } ], "video_p50_watched_actions": [ { "action_type": "video_view", "value": "5" } ], "video_p75_watched_actions": [ { "action_type": "video_view", "value": "1" } ], "video_p95_watched_actions": [ { "action_type": "video_view", "value": "1" } ], "video_play_actions": [ { "action_type": "video_view", "value": "47" } ], "video_thruplay_watched_actions": [ { "action_type": "video_view", "value": "5" } ], "website_ctr": [ { "action_type": null, "value": null } ], "relevance_score": { "status": "NOT_ENOUGH_IMPRESSIONS" }, "dates": "2019-09-15", "date_start": "2019-06-17T06:00:00", "date_stop": "2019-10-31T23:00:46" }
