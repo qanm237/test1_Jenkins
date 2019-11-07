@@ -54,7 +54,7 @@ This is an API which extract data from api.facebook.com website and pushes it to
 
 
 
-**Internal code logic for linkedin**
+## Internal code logic for linkedin
 
 #### Following parameters are to be passed to the function which fetches data for linkedin:
 * Start date : This is the start date for which you want to pull the data
@@ -141,7 +141,7 @@ Here's the sample JSON output which is dumped in to BigQuery:
 ```
 
 
-**Internal code logic for facebook**
+## Internal code logic for facebook
 
 ##### Following parameters are to be passed to the function which fetches data for facebook:**
 * Start date : This is the start date for which you want to pull the data
